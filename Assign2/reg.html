@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registration Form</title>
+  <link rel="stylesheet" type="text/css" href="reg.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fffefa;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    form {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    input {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #e06183;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #1d3ba6;
+    }
+
+    .error {
+      color: #ff0000;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+  <form id="registrationForm">
+ 
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username">
+
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email">
+
+    <label for="phone">Phone number:</label>
+    <input type="text" id="phone" name="phone">
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password">
+
+    <label for="confirmPassword">Confirm Password:</label>
+    <input type="password" id="confirmPassword" name="confirmPassword">
+
+    <button type="button" onclick="validateForm()">Submit</button>
+  </form>
+</div>
+
+
+
+<script>
+  function validateForm() {
+    var username = document.getElementById('username').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var phone = document.getElementById('phone').value.trim();
+    var password = document.getElementById('password').value;
+    var confirmPassword = document.getElementById('confirmPassword').value;
+
+    var usernameRegex = /^[a-zA-Z0-9 ]*$/;
+    var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z]+\.[a-zA-Z]{2,3}$/;
+    var phoneRegex = /^[0-9]{10}$/;
+    var passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[&$#@]).{7,}$/;
+
+    var errors = [];
+
+    if (username === '') {
+      errors.push("Username is required.");
+    } else if (!usernameRegex.test(username)) {
+      errors.push("Invalid characters in the username.");
+    }
+
+    if (email === '') {
+      errors.push("Email is required.");
+    } else if (!emailRegex.test(email)) {
+      errors.push("Invalid email format.");
+    }
+
+    if (phone === '') {
+      errors.push("Phone number is required.");
+    } else if (!phoneRegex.test(phone)) {
+      errors.push("Invalid phone number.");
+    }
+
+    if (password === '') {
+      errors.push("Password is required.");
+    } else if (!passwordRegex.test(password)) {
+      errors.push("Invalid password format.");
+    }
+
+    if (confirmPassword !== password) {
+      errors.push("Passwords do not match.");
+    }
+
+    if (errors.length > 0) {
+      alert(errors.join('\n'));
+    } else {
+      alert("Form submitted successfully!");
+      
+    }
+  }
+</script>
+
+</body>
+</html>
